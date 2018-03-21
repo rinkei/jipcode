@@ -10,4 +10,4 @@
 # rspec failure tracking
 .rspec_status
 
-ken_all.zip
+/zipcode/*.zip
