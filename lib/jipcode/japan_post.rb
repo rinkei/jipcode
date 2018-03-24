@@ -81,12 +81,9 @@ module Jipcode
     def import(zipcodes)
       CSV.parse zipcodes do |row|
         address = yield(row)
-        zipcode = address.shift
-
-        # 郵便番号は10万件以上あるので上3桁ごとにディレクトリを分割
-        dir = "#{ZIPCODE_PATH}/#{zipcode[0..2]}"
-        Dir.mkdir(dir) unless Dir.exist?(dir)
-        open("#{dir}/#{zipcode[3..6]}.csv", 'a') { |f| f.write("#{address.join(',')}\n") }
+        # 10万件以上あるので郵便番号上3桁ごとに分割
+        filepath = "#{ZIPCODE_PATH}/#{address[0][0..2]}.csv"
+        open(filepath, 'a') { |f| f.write("#{address.join(',')}\n") }
       end
     end
 
