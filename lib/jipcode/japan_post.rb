@@ -15,6 +15,11 @@ module Jipcode
       company: 'JIGYOSYO.CSV'.freeze
     }.freeze
 
+    def update
+      download_all
+      import_all
+    end
+
     def download_all
       ZIPCODE_URLS.each do |type, url|
         url = URI.parse(url)
@@ -85,7 +90,7 @@ module Jipcode
       end
     end
 
-    module_function :download_all, :import_all, :unpack, :import
+    module_function :update, :download_all, :import_all, :unpack, :import
     private_class_method :unpack, :import
   end
 end
