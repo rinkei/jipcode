@@ -1,0 +1,92 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://www.post.japanpost.jp/zipcode/dl/kogaki/zip/ken_all.zip
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 25 Mar 2018 04:56:23 GMT
+      Server:
+      - Apache
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      Last-Modified:
+      - Wed, 28 Feb 2018 07:59:01 GMT
+      Accept-Ranges:
+      - bytes
+      Content-Type:
+      - application/zip
+      Content-Length:
+      - '1686611'
+      Proxy-Connection:
+      - Keep-Alive
+      Connection:
+      - Keep-Alive
+      Age:
+      - '904'
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+  recorded_at: Sun, 25 Mar 2018 05:11:27 GMT
+- request:
+    method: get
+    uri: http://www.post.japanpost.jp/zipcode/dl/jigyosyo/zip/jigyosyo.zip
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 25 Mar 2018 04:56:24 GMT
+      Server:
+      - Apache
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      Last-Modified:
+      - Wed, 28 Feb 2018 07:59:01 GMT
+      Accept-Ranges:
+      - bytes
+      Content-Type:
+      - application/zip
+      Content-Length:
+      - '759923'
+      Proxy-Connection:
+      - Keep-Alive
+      Connection:
+      - Keep-Alive
+      Age:
+      - '903'
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+    http_version:
+  recorded_at: Sun, 25 Mar 2018 05:11:27 GMT
+recorded_with: VCR 4.0.0
