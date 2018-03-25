@@ -3,6 +3,26 @@
 Jipcodeは郵便番号から住所を検索する機能を提供します。
 郵便番号と対応する住所のデータは日本郵便の公式サイトで配布されているものを用いています。
 
+## Installation
+
+Add this line to your application's Gemfile:
+
+```ruby
+gem 'jipcode'
+```
+
+And then execute:
+
+```shell
+$ bundle install
+```
+
+Or install it yourself as:
+
+```shell
+$ gem install jipcode
+```
+
 ## Usage
 
 ### 検索
