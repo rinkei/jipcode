@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    jipcode (0.1.0)
+    jipcode (1.0.0)
 
 GEM
   remote: https://rubygems.org/
