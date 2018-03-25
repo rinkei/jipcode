@@ -7,10 +7,12 @@ require 'nkf'
 module Jipcode
   module JapanPost
     ZIPCODE_URLS = {
-      general: 'http://www.post.japanpost.jp/zipcode/dl/kogaki/zip/ken_all.zip'.freeze
+      general: 'http://www.post.japanpost.jp/zipcode/dl/kogaki/zip/ken_all.zip'.freeze,
+      company: 'http://www.post.japanpost.jp/zipcode/dl/jigyosyo/zip/jigyosyo.zip'.freeze
     }.freeze
     ZIPCODE_FILES = {
-      general: 'KEN_ALL.CSV'.freeze
+      general: 'KEN_ALL.CSV'.freeze,
+      company: 'JIGYOSYO.CSV'.freeze
     }.freeze
 
     def download_all
@@ -35,6 +37,16 @@ module Jipcode
         # 郵便番号の下2桁が00の時、町域指定されない。
         # その場合、町域は「以下に掲載がない場合」となっているのでnilにする。
         town       = zipcode[5..6] == '00' ? nil : row[8]
+
+        [zipcode, prefecture, city, town]
+      end
+
+      zipcodes = unpack(:company)
+      import(zipcodes) do |row|
+        zipcode    = row[7] # 郵便番号
+        prefecture = row[3] # 都道府県
+        city       = row[4] # 市区町村
+        town       = row[5] + row[6] # 町域 + 番地
 
         [zipcode, prefecture, city, town]
       end
