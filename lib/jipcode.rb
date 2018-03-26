@@ -2,7 +2,7 @@ require "jipcode/version"
 require 'csv'
 
 module Jipcode
-  ZIPCODE_PATH = 'zipcode/latest'.freeze
+  ZIPCODE_PATH = "#{File.dirname(__FILE__)}/../zipcode/latest".freeze
 
   def search(zipcode)
     path = "#{ZIPCODE_PATH}/#{zipcode[0..2]}.csv"
