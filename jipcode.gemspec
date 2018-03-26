@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["rinkei"]
   spec.email         = ["kei.h.hayashi@gmail.com"]
 
-  spec.summary       = %q{jipcode is a search & update gem for Japan Post's official zipcode data.}
-  spec.description   = %q{jipcode is a search & update gem for Japan Post's official zipcode data.}
+  spec.summary       = %q{A gem for Japan Post's official zipcode data search & update.}
+  spec.description   = %q{A gem for Japan Post's official zipcode data search & update.}
   spec.homepage      = "https://github.com/rinkei/jipcode"
   spec.license       = "MIT"
 
