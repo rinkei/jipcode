@@ -19,13 +19,5 @@ module Jipcode
     end
   end
 
-  def search(zipcode)
-    warn '[DEPRECATION] `search` is deprecated.  Please use `locate` instead.'
-    path = "#{ZIPCODE_PATH}/#{zipcode[0..2]}.csv"
-    return [] unless File.exist?(path)
-    addresses = open(path) { |f| f.read }
-    CSV.parse(addresses).select { |address| address[0] == zipcode }
-  end
-
-  module_function :locate, :search
+  module_function :locate
 end
