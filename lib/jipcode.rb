@@ -8,8 +8,7 @@ module Jipcode
     path = "#{ZIPCODE_PATH}/#{zipcode[0..2]}.csv"
     return [] unless File.exist?(path)
 
-    addresses_csv = open(path) { |f| f.read }
-    addresses_array = CSV.parse(addresses_csv).select { |address| address[0] == zipcode }
+    addresses_array = CSV.read(path).select { |address| address[0] == zipcode }
     addresses_array.map do |address_param|
       {
         zipcode:    address_param[0],
