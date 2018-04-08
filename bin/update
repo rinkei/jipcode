@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+bundle exec rake update
+git add zipcode/latest
+
+if git commit -m '最新の郵便番号データに更新'; then
+  bundle exec bump patch -m '郵便番号データの更新に伴うアップデート'
+
+  git push origin master
+  bundle exec rake release
+fi
