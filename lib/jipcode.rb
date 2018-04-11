@@ -5,6 +5,10 @@ module Jipcode
   ZIPCODE_PATH = "#{File.dirname(__FILE__)}/../zipcode/latest".freeze
 
   def locate(zipcode)
+    # 数字7桁以外の入力は受け付けない
+    return [] unless zipcode =~ /\A\d{7}?\z/
+
+    # 上3桁にマッチするファイルが存在しなければ該当なし
     path = "#{ZIPCODE_PATH}/#{zipcode[0..2]}.csv"
     return [] unless File.exist?(path)
 
