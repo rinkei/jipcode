@@ -39,9 +39,9 @@ module Jipcode
         zipcode    = row[2] # 郵便番号
         prefecture = row[6] # 都道府県
         city       = row[7] # 市区町村
-        # 郵便番号の下2桁が00の時、町域指定されない。
-        # その場合、町域は「以下に掲載がない場合」となっているのでnilにする。
-        town       = zipcode[5..6] == '00' ? nil : row[8]
+        town       = row[8] # 町域
+        # 町域に含まれる曖昧な表記を削除
+        town       = town.sub(/(（.+）|一円|の次に番地がくる場合|以下に掲載がない場合)$/, '')
 
         [zipcode, prefecture, city, town]
       end
