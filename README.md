@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/rinkei/jipcode.svg?branch=master)](https://travis-ci.org/rinkei/jipcode)
+
 # Jipcode
 
 Jipcodeは郵便番号から住所を検索する機能を提供します。
