@@ -40,8 +40,6 @@ module Jipcode
         prefecture = row[6] # 都道府県
         city       = row[7] # 市区町村
         town       = row[8] # 町域
-        # 町域に含まれる曖昧な表記を削除
-        town       = town.sub(/(（.+）|一円|の次に番地がくる場合|以下に掲載がない場合)$/, '')
 
         [zipcode, prefecture, city, town]
       end
@@ -79,8 +77,24 @@ module Jipcode
     end
 
     def import(zipcodes)
+      duplicated_row = false
       CSV.parse zipcodes do |row|
         address = yield(row)
+        puts row unless address
+
+        town = address[3]
+        if duplicated_row
+          duplicated_row = false if town.end_with?('）')
+          next
+        else
+          duplicated_row = true if town.include?('（') && !town.include?('）')
+        end
+
+        # 町域等に含まれる曖昧な表記を削除
+        unless town.include?('私書箱')
+          address[3] = town.sub(/(（.+|一円|の次に番地がくる場合|以下に掲載がない場合)$/, '')
+        end
+
         # 10万件以上あるので郵便番号上3桁ごとに分割
         filepath = "#{ZIPCODE_PATH}/#{address[0][0..2]}.csv"
         open(filepath, 'a') { |f| f.write("#{address.join(',')}\n") }
