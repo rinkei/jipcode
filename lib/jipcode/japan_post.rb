@@ -92,11 +92,11 @@ module Jipcode
 
         # 町域等に含まれる曖昧な表記を削除
         unless town.include?('私書箱')
-          address[3] = town.sub(/(（.+|一円|以下に掲載がない場合)$/, '')
+          address[3] = town.sub(/(（.+|以下に掲載がない場合)$/, '')
         end
 
         # 町域等の内容が市区町村の内容と重複する場合、空にする
-        if town.include?('の次に番地がくる場合')
+        if town.include?('の次に番地がくる場合') || town.include?('一円')
           address[3] = nil
         end
 
