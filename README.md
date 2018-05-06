@@ -39,18 +39,9 @@ Jipcode.locate('1510051')
 
 ### 更新
 日本郵便の郵便番号データは月末に更新されています。
-これを取り込むには次のRakeタスクを実行してください。
+jipcodeではこれを毎月取り込んでいます。
 
-```ruby
-$ bundle exec rake update
-```
-
-郵便番号データのダウンロードと取り込みを分けることもできます。
-
-```shell
-$ bundle exec rake download # 郵便番号データのダウンロード
-$ bundle exec rake import   # 郵便番号データの取り込み
-```
+更新を反映したい時は`bundle update jipcode`してください。
 
 ## License
 
