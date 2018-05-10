@@ -1,7 +1,17 @@
 #!/usr/bin/env bash
 
+# 最後のデータ更新月が現在の月ならば実行しない
+if [ `cat zipcode/current_month` = `date "+%Y%m"` ]; then
+  exit 0
+fi
+
 bundle exec rake update
-git add zipcode/latest
+# rake updateが何らかの理由で失敗したらエラーとして終了
+if [ $? = "1" ]; then
+  exit 1
+fi
+
+git add zipcode/latest zipcode/current_month
 
 if git commit -m '最新の郵便番号データに更新'; then
   bundle exec bump patch -m '郵便番号データの更新に伴うアップデート'

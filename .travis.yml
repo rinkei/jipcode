@@ -4,5 +4,5 @@ rvm:
   - 2.5.0
 before_install: gem install bundler -v 1.16.1
 script:
-  - if [ "$TRAVIS_EVENT_TYPE" = "cron" ]; then bin/update; fi
+  - bin/update
   - bundle exec rake spec
