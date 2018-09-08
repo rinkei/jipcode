@@ -7,8 +7,8 @@ require 'nkf'
 module Jipcode
   module JapanPost
     ZIPCODE_URLS = {
-      general: 'http://www.post.japanpost.jp/zipcode/dl/kogaki/zip/ken_all.zip'.freeze,
-      company: 'http://www.post.japanpost.jp/zipcode/dl/jigyosyo/zip/jigyosyo.zip'.freeze
+      general: 'https://www.post.japanpost.jp/zipcode/dl/kogaki/zip/ken_all.zip'.freeze,
+      company: 'https://www.post.japanpost.jp/zipcode/dl/jigyosyo/zip/jigyosyo.zip'.freeze
     }.freeze
     ZIPCODE_FILES = {
       general: 'KEN_ALL.CSV'.freeze,
@@ -23,10 +23,10 @@ module Jipcode
     def download_all
       ZIPCODE_URLS.each do |type, url|
         url = URI.parse(url)
-        Net::HTTP.start(url.host, url.port) do |http|
-          res = http.get(url.path)
-          File.open("zipcode/#{type}.zip", 'wb') { |f| f.write(res.body) }
-        end
+        http = Net::HTTP.new(url.host, 443)
+        http.use_ssl = true
+        res = http.get(url.path)
+        File.open("zipcode/#{type}.zip", 'wb') { |f| f.write(res.body) }
       end
     end
 

@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: http://www.post.japanpost.jp/zipcode/dl/kogaki/zip/ken_all.zip
+    uri: https://www.post.japanpost.jp/zipcode/dl/kogaki/zip/ken_all.zip
     body:
       encoding: US-ASCII
       string: ''
@@ -46,7 +46,7 @@ http_interactions:
   recorded_at: Sun, 25 Mar 2018 05:11:27 GMT
 - request:
     method: get
-    uri: http://www.post.japanpost.jp/zipcode/dl/jigyosyo/zip/jigyosyo.zip
+    uri: https://www.post.japanpost.jp/zipcode/dl/jigyosyo/zip/jigyosyo.zip
     body:
       encoding: US-ASCII
       string: ''
