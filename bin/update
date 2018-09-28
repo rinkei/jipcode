@@ -5,6 +5,14 @@ if [ `cat zipcode/current_month` = `date "+%Y%m"` ]; then
   exit 0
 fi
 
+# 開発用ブランチで作業する
+git fetch origin +refs/pull/4/merge:make_update_daily
+git checkout make_update_daily
+git show HEAD | grep 'Author: travis'
+if [ $? = "0" ]; then
+  exit 0
+fi
+
 bundle exec rake update
 # rake updateが何らかの理由で失敗したらエラーとして終了
 if [ $? = "1" ]; then
@@ -15,4 +23,6 @@ git add zipcode/latest zipcode/current_month
 
 if git commit -m '最新の郵便番号データに更新'; then
   bundle exec bump patch -m '郵便番号データの更新に伴うアップデート'
+
+  git push --set-upstream -qf origin make_update_daily
 fi
