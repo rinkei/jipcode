@@ -5,6 +5,8 @@ if [ `cat zipcode/current_month` = `date "+%Y%m"` ]; then
   exit 0
 fi
 
+git checkout master
+
 bundle exec rake update
 # rake updateが何らかの理由で失敗したらエラーとして終了
 if [ $? = "1" ]; then
