@@ -1,11 +1,22 @@
 #!/usr/bin/env bash
 
-bundle exec rake update
-git add zipcode/latest
+# 最後のデータ更新月が現在の月ならば実行しない
+if [ `cat zipcode/current_month` = `date "+%Y%m"` ]; then
+  exit 0
+fi
 
-if git commit -m '最新の郵便番号データに更新'; then
-  bundle exec bump patch -m '郵便番号データの更新に伴うアップデート'
+bundle exec rake update
+# rake updateが何らかの理由で失敗したらエラーとして終了
+if [ $? = "1" ]; then
+  exit 1
+fi
+
+git add zipcode/latest zipcode/current_month
+
+if git commit -m `date "+%Y年%m月%d日現在の郵便番号データに更新"`; then
+  bundle exec bump patch --no-commit
+  git add Gemfile.lock lib/jipcode/version.rb
+  git commit -m "バージョンを`bundle exec bump current | sed -e "s/^\(.*: \)//"`に更新"
 
   git push origin master
-  bundle exec rake release
 fi

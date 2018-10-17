@@ -2,7 +2,11 @@ sudo: false
 language: ruby
 rvm:
   - 2.5.0
-before_install: gem install bundler -v 1.16.1
+before_install:
+  - openssl aes-256-cbc -K $encrypted_3597653ee3ea_key -iv $encrypted_3597653ee3ea_iv -in .travis_rsa.enc -out ~/.ssh/id_rsa -d
+  - chmod 600 ~/.ssh/id_rsa
+  - git remote set-url origin git@github.com:rinkei/jipcode.git
+  - gem install bundler -v 1.16.1
 script:
-  - if [ "$TRAVIS_EVENT_TYPE" = "cron" ]; then bin/update; fi
+  - bin/update
   - bundle exec rake spec

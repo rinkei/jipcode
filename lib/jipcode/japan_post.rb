@@ -18,6 +18,9 @@ module Jipcode
     def update
       download_all
       import_all
+
+      # データの更新月を記録する
+      File.open('zipcode/current_month', 'w') { |f| f.write(Time.now.strftime('%Y%m')) }
     end
 
     def download_all
