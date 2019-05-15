@@ -29,9 +29,19 @@ RSpec.describe Jipcode do
 
       it '対応する住所を全て含む配列を返す' do
         is_expected.to eq [
-          { zipcode: '0000001', prefecture: 'HOGE県', city: 'hoge市', town: 'ほげ' },
-          { zipcode: '0000001', prefecture: 'FUGA県', city: 'fuga市', town: 'ふが' }
+          { zipcode: '0000001', prefecture: 'HOGE県', city: 'hoge市', town: 'ほげ', prefecture_code: nil },
+          { zipcode: '0000001', prefecture: 'FUGA県', city: 'fuga市', town: 'ふが', prefecture_code: nil }
         ]
+      end
+
+      context 'prefecture_code.yml に対応する都道府県がある時' do
+        let(:zipcode) { '1000000' }
+
+        it '対応する prefecture_code も含む配列を返す' do
+          is_expected.to eq [
+            { zipcode: '1000000', prefecture: '東京都', city: '千代田区', town: nil, prefecture_code: 13 }
+          ]
+        end
       end
     end
   end
