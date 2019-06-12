@@ -38,7 +38,7 @@ RSpec.describe Jipcode do
 
   describe '.locate_by_address' do
     before(:all) do
-      open("#{Jipcode::PREFECTURE_PATH}/0.csv", 'w') do |f|
+      open("#{Jipcode::AddressLocator::PREFECTURE_PATH}/0.csv", 'w') do |f|
         f.write <<~CSV
           0000001,HOGE県,hoge市,ほげ町
           0000002,HOGE県,hoge市,ほげ町ホゲ
@@ -48,7 +48,7 @@ RSpec.describe Jipcode do
     end
 
     after(:all) do
-      File.delete("#{Jipcode::PREFECTURE_PATH}/0.csv")
+      File.delete("#{Jipcode::AddressLocator::PREFECTURE_PATH}/0.csv")
     end
 
     subject { Jipcode.locate_by_address(address) }
@@ -63,7 +63,7 @@ RSpec.describe Jipcode do
 
     context '引数の住所に対応する都道府県があり' do
       before do
-        allow(Jipcode::PrefectureExporter).to receive(:prefecture_code).with(address).and_return(0)
+        allow(Jipcode::AddressLocator).to receive(:prefecture_code).with(address).and_return(0)
       end
       context 'さらに対応する住所がある時' do
         let(:address) { 'HOGE県hoge市ほげ町ホゲ１ー１' }

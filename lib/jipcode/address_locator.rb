@@ -1,8 +1,9 @@
 require 'csv'
+require 'jaro_winkler'
 require 'jipcode'
 
 module Jipcode
-  module PrefectureExporter
+  module AddressLocator
     # http://nlftp.mlit.go.jp/ksj/gml/codelist/PrefCd.html
     PREFECTURE_CODE = {
       '北海道' => 1,
@@ -92,6 +93,34 @@ module Jipcode
       raise e, '都道府県別CSVの出力に失敗しました'
     end
 
+    def locate(search_address)
+      prefecture_code = prefecture_code(search_address)
+      return [] if prefecture_code.nil?
+      path = "#{PREFECTURE_PATH}/#{prefecture_code}.csv"
+
+      # 検索語句と住所データ
+      filtered = CSV.read(path).select do |row|
+        address = row[1..3].join('')
+        # 長いほうが短い方に含まれてるか判別
+        long = [address, search_address].max
+        short = [address, search_address].min
+        long.start_with?(short)
+      end
+
+      # 編集距離を測定
+      with_distance = filtered.map do |row|
+        combined = row[1..3].join('')
+        distance = JaroWinkler.distance(combined, search_address)
+        row << distance
+      end
+
+      # 近い順にソート
+      # ジャロウィンクラー距離は1に近いほど類似度が高い
+      with_distance
+        .sort_by { |row| row.last }
+        .reverse
+    end
+
     def prefecture_code(address)
       prefecture_name = address.match(/\A(#{prefecture_names.join('|')})/).to_s
       PREFECTURE_CODE[prefecture_name]
@@ -101,7 +130,7 @@ module Jipcode
       PREFECTURE_CODE.keys
     end
 
-    module_function :export_csv_by_prefecture, :prefecture_code, :prefecture_names
-    private_class_method :prefecture_names
+    module_function :export_csv_by_prefecture, :locate, :prefecture_code, :prefecture_names
+    private_class_method :prefecture_names, :prefecture_code
   end
 end

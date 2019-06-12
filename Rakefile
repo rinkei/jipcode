@@ -1,7 +1,7 @@
 require "bundler/gem_tasks"
 require "rspec/core/rake_task"
 require 'jipcode/japan_post'
-require 'jipcode/prefecture_exporter'
+require 'jipcode/address_locator'
 
 RSpec::Core::RakeTask.new(:spec)
 
@@ -10,7 +10,7 @@ task :default => :spec
 desc '日本郵便から全郵便番号データをダウンロードし、ローカルに取り込む'
 task :update do
   Jipcode::JapanPost.update
-  Jipcode::PrefectureExporter.export_csv_by_prefecture
+  Jipcode::AddressLocator.export_csv_by_prefecture
 end
 
 namespace :update do
@@ -26,6 +26,6 @@ namespace :update do
 
   desc '郵便番号データを都道府県ごとに加工する'
   task :export_prefectures do
-    Jipcode::PrefectureExporter.export_csv_by_prefecture
+    Jipcode::AddressLocator.export_csv_by_prefecture
   end
 end
