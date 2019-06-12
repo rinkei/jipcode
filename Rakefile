@@ -10,7 +10,7 @@ task :default => :spec
 desc '日本郵便から全郵便番号データをダウンロードし、ローカルに取り込む'
 task :update do
   Jipcode::JapanPost.update
-  Jipcode::AddressLocator.export_csv_by_prefecture
+  Jipcode::AddressLocator.create_index
 end
 
 namespace :update do
@@ -24,8 +24,8 @@ namespace :update do
     Jipcode::JapanPost.import_all
   end
 
-  desc '郵便番号データを都道府県ごとに加工する'
-  task :export_prefectures do
-    Jipcode::AddressLocator.export_csv_by_prefecture
+  desc '郵便番号データを都道府県ごとのインデックスを作成する'
+  task :create_index do
+    Jipcode::AddressLocator.create_index
   end
 end

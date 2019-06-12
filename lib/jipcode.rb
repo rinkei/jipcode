@@ -18,9 +18,9 @@ module Jipcode
   end
 
   def locate_by_address(search_address)
-    AddressLocator
-      .locate(search_address)
-      .map { |row| make_address(row) }
+    AddressLocator.locate(search_address).map do |row|
+      make_address(row) { |address| address[:distance] = row[4] }
+    end
   end
 
   # Private
@@ -33,9 +33,7 @@ module Jipcode
       town:       address_param[3]
     }
 
-    if address_param[4]
-      address[:distance] = address_param[4]
-    end
+    yield(address) if block_given?
 
     address
   end

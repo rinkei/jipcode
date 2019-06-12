@@ -4,8 +4,9 @@ require 'jipcode'
 
 module Jipcode
   module AddressLocator
+
     # http://nlftp.mlit.go.jp/ksj/gml/codelist/PrefCd.html
-    PREFECTURE_CODE = {
+    PREFECTURE_CODES = {
       '北海道' => 1,
       '青森県' => 2,
       '岩手県' => 3,
@@ -55,22 +56,22 @@ module Jipcode
       '沖縄県' => 47
     }
 
-    PREFECTURE_PATH = "#{File.dirname(__FILE__)}/../../zipcode/by_prefecture/latest".freeze
+    INDEX_PATH = "#{File.dirname(__FILE__)}/../../zipcode/by_prefecture/latest".freeze
 
-    PREVIOUS_PREFECTURE_PATH = "#{File.dirname(__FILE__)}/../../zipcode/by_prefecture/previous".freeze
+    TEMPORARY_INDEX_PATH = "#{File.dirname(__FILE__)}/../../zipcode/by_prefecture/previous".freeze
 
-    def export_csv_by_prefecture
-      File.rename(PREFECTURE_PATH, PREVIOUS_PREFECTURE_PATH) if File.exist?(PREFECTURE_PATH)
-      Dir.mkdir(PREFECTURE_PATH)
+    def create_index
+      File.rename(INDEX_PATH, TEMPORARY_INDEX_PATH) if File.exist?(INDEX_PATH)
+      Dir.mkdir(INDEX_PATH)
 
       # 都道府県コードは1から始まるので一つ余計に作る
-      prefecture_csvs = Array.new(PREFECTURE_CODE.size + 1) { [] }
+      prefecture_csvs = Array.new(PREFECTURE_CODES.size + 1) { [] }
 
+      # 都道府県別のインデックスを作成する
       Dir.glob("#{ZIPCODE_PATH}/*.csv").each do |file_name|
-        csv = CSV.read(file_name)
-        csv.each do |row|
+        CSV.read(file_name).each do |row|
           _zipcode, prefecture, _city, _town = row
-          prefecture_code = PREFECTURE_CODE[prefecture]
+          prefecture_code = PREFECTURE_CODES[prefecture]
           prefecture_csvs[prefecture_code] << row
         end
       end
@@ -81,24 +82,24 @@ module Jipcode
       # Export
       prefecture_csvs.each.with_index(1) do |rows, prefecture_code|
         rows.sort_by! { |row| row[0] }
-        CSV.open("#{PREFECTURE_PATH}/#{prefecture_code}.csv", "wb") do |csv|
+        CSV.open("#{INDEX_PATH}/#{prefecture_code}.csv", "wb") do |csv|
           rows.each { |row| csv << row }
         end
       end
 
-      FileUtils.rm_rf(PREVIOUS_PREFECTURE_PATH)
+      FileUtils.rm_rf(TEMPORARY_INDEX_PATH)
     rescue => e
-      FileUtils.rm_rf(PREFECTURE_PATH)
-      File.rename(PREVIOUS_PREFECTURE_PATH, PREFECTURE_PATH) if File.exist?(PREVIOUS_PREFECTURE_PATH)
+      FileUtils.rm_rf(INDEX_PATH)
+      File.rename(TEMPORARY_INDEX_PATH, INDEX_PATH) if File.exist?(TEMPORARY_INDEX_PATH)
       raise e, '都道府県別CSVの出力に失敗しました'
     end
 
     def locate(search_address)
       prefecture_code = prefecture_code(search_address)
       return [] if prefecture_code.nil?
-      path = "#{PREFECTURE_PATH}/#{prefecture_code}.csv"
+      path = "#{INDEX_PATH}/#{prefecture_code}.csv"
 
-      # 検索語句と住所データ
+      # 検索語句と住所を照合する
       filtered = CSV.read(path).select do |row|
         address = row[1..3].join('')
         # 長いほうが短い方に含まれてるか判別
@@ -114,8 +115,8 @@ module Jipcode
         row << distance
       end
 
-      # 近い順にソート
-      # ジャロウィンクラー距離は1に近いほど類似度が高い
+      # 一致度が近い順にソート
+      # ジャロ-ウィンクラー距離は1に近いほど類似度が高い
       with_distance
         .sort_by { |row| row.last }
         .reverse
@@ -123,14 +124,14 @@ module Jipcode
 
     def prefecture_code(address)
       prefecture_name = address.match(/\A(#{prefecture_names.join('|')})/).to_s
-      PREFECTURE_CODE[prefecture_name]
+      PREFECTURE_CODES[prefecture_name]
     end
 
     def prefecture_names
-      PREFECTURE_CODE.keys
+      PREFECTURE_CODES.keys
     end
 
-    module_function :export_csv_by_prefecture, :locate, :prefecture_code, :prefecture_names
+    module_function :create_index, :locate, :prefecture_code, :prefecture_names
     private_class_method :prefecture_names, :prefecture_code
   end
 end
