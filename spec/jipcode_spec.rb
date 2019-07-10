@@ -29,13 +29,18 @@ RSpec.describe Jipcode do
 
       it '対応する住所を全て含む配列を返す' do
         is_expected.to eq [
-          { zipcode: '0000001', prefecture: 'HOGE県', city: 'hoge市', town: 'ほげ', prefecture_code: nil },
-          { zipcode: '0000001', prefecture: 'FUGA県', city: 'fuga市', town: 'ふが', prefecture_code: nil }
+          { zipcode: '0000001', prefecture: 'HOGE県', city: 'hoge市', town: 'ほげ' },
+          { zipcode: '0000001', prefecture: 'FUGA県', city: 'fuga市', town: 'ふが' }
         ]
       end
+    end
 
-      context 'prefecture_code.yml に対応する都道府県がある時' do
+    context 'opt が空ではない時' do
+      subject { Jipcode.locate(zipcode, opt) }
+
+      context 'opt[:prefecture_code]' do
         let(:zipcode) { '1000000' }
+        let(:opt) { { prefecture_code: true } }
 
         it '対応する prefecture_code も含む配列を返す' do
           is_expected.to eq [
