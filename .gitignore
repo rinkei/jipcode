@@ -6,13 +6,6 @@
 /pkg/
 /spec/reports/
 /tmp/
-/vendor/
-
-# ctags
-tags
-
-# byebug
-.byebug_history
 
 # rspec failure tracking
 .rspec_status
