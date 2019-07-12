@@ -81,7 +81,7 @@ module Jipcode
 
       # Export
       prefecture_csvs.each.with_index(1) do |rows, prefecture_code|
-        rows.sort_by! { |row| row[0] }
+        rows.sort_by! { |row| [row[0], row[2], row[3]] }
         CSV.open("#{INDEX_PATH}/#{prefecture_code}.csv", "wb") do |csv|
           rows.each { |row| csv << row }
         end
