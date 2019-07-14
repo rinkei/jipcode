@@ -4,7 +4,7 @@ require 'yaml'
 
 module Jipcode
   ZIPCODE_PATH = "#{File.dirname(__FILE__)}/../zipcode/latest".freeze
-  PREFECTURE_CODE = YAML.load_file("#{File.dirname(__FILE__)}/../data/prefecture_code.yml").freeze
+  PREFECTURE_CODE = YAML.load_file("#{File.dirname(__FILE__)}/../prefecture_code.yml").freeze
 
   def locate(zipcode, opt={})
     # 数字7桁以外の入力は受け付けない
