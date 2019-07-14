@@ -37,6 +37,14 @@ Jipcode.locate('1510051')
 # => [{zipcode: '1510051', prefecture: '東京都', city: '渋谷区', town: '千駄ヶ谷'}]
 ```
 
+#### 都道府県コード
+次のようにオプションで都道府県コードを検索結果に含めることもできます。
+
+```ruby
+Jipcode.locate('1510051', prefecture_code: true)
+# => [{:zipcode=>"1510051", :prefecture=>"東京都", :city=>"渋谷区", :town=>"千駄ヶ谷", :prefecture_code=>13}]
+```
+
 ### 更新
 日本郵便の郵便番号データは月末に更新されています。
 jipcodeではこれを毎月取り込んでいます。
