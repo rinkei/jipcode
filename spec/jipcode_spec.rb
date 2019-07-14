@@ -34,5 +34,20 @@ RSpec.describe Jipcode do
         ]
       end
     end
+
+    context 'opt が空ではない時' do
+      subject { Jipcode.locate(zipcode, opt) }
+
+      context 'opt[:prefecture_code]' do
+        let(:zipcode) { '1000000' }
+        let(:opt) { { prefecture_code: true } }
+
+        it '対応する prefecture_code も含む配列を返す' do
+          is_expected.to eq [
+            { zipcode: '1000000', prefecture: '東京都', city: '千代田区', town: nil, prefecture_code: 13 }
+          ]
+        end
+      end
+    end
   end
 end
