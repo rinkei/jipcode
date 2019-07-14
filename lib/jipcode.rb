@@ -17,6 +17,7 @@ module Jipcode
     addresses_array = CSV.read(path).select { |address| address[0] == zipcode }
 
     if opt.empty?
+      # optが空の場合、直接basic_address_fromを呼んで不要な判定を避ける。
       addresses_array.map { |address_param| basic_address_from(address_param) }
     else
       addresses_array.map { |address_param| extended_address_from(address_param, opt) }
