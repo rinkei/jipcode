@@ -17,8 +17,7 @@ module Jipcode
     addresses_array = CSV.read(path).select { |address| address[0] == zipcode }
 
     if opt.empty?
-      # optが空の場合、直接basic_address_fromを呼んで不要な判定を避ける。
-      addresses_array.map { |address_param| basic_address_from(address_param) }
+      addresses_array.map { |address_param| address_from(address_param) }
     else
       extending_params = {}
 
@@ -27,11 +26,11 @@ module Jipcode
         extending_params[:prefecture_code] = PREFECTURE_CODE.invert[prefecture]
       end
 
-      addresses_array.map { |address_param| basic_address_from(address_param).merge(extending_params) }
+      addresses_array.map { |address_param| address_from(address_param).merge(extending_params) }
     end
   end
 
-  def basic_address_from(address_param)
+  def address_from(address_param)
     {
       zipcode:    address_param[0],
       prefecture: address_param[1],
@@ -40,5 +39,5 @@ module Jipcode
     }
   end
 
-  module_function :locate, :basic_address_from
+  module_function :locate, :address_from
 end
