@@ -40,11 +40,5 @@ module Jipcode
     }
   end
 
-  def extended_address_from(address_param, opt={})
-    address = basic_address_from(address_param)
-    address[:prefecture_code] = PREFECTURE_CODE.invert[address_param[1]] if opt[:prefecture_code]
-    address
-  end
-
-  module_function :locate, :basic_address_from, :extended_address_from
+  module_function :locate, :basic_address_from
 end
