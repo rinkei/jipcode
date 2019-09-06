@@ -17,7 +17,7 @@ module Jipcode
     addresses_array = CSV.read(path).select { |address| address[0] == zipcode }
 
     if opt.empty?
-      addresses_array.map { |address_param| address_from(address_param) }
+      addresses_array.map { |address_params| address_from(address_params) }
     else
       extending_params = {}
 
@@ -26,16 +26,16 @@ module Jipcode
         extending_params[:prefecture_code] = PREFECTURE_CODE.invert[prefecture]
       end
 
-      addresses_array.map { |address_param| address_from(address_param).merge(extending_params) }
+      addresses_array.map { |address_params| address_from(address_params).merge(extending_params) }
     end
   end
 
-  def address_from(address_param)
+  def address_from(address_params)
     {
-      zipcode:    address_param[0],
-      prefecture: address_param[1],
-      city:       address_param[2],
-      town:       address_param[3]
+      zipcode:    address_params[0],
+      prefecture: address_params[1],
+      city:       address_params[2],
+      town:       address_params[3]
     }
   end
 
