@@ -28,7 +28,7 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.7.0)
     rspec-support (3.7.1)
-    rubyzip (1.2.2)
+    rubyzip (2.0.0)
     safe_yaml (1.0.4)
     vcr (4.0.0)
     webmock (3.3.0)
