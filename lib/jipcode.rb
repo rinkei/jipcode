@@ -8,7 +8,7 @@ module Jipcode
 
   def locate(zipcode, opt={})
     # 数字7桁以外の入力は受け付けない
-    return [] unless zipcode =~ /\A\d{7}?\z/
+    return [] unless zipcode&.match?(/\A\d{7}?\z/)
 
     # 上3桁にマッチするファイルが存在しなければ該当なし
     path = "#{ZIPCODE_PATH}/#{zipcode[0..2]}.csv"
