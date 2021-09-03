@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    jipcode (2.0.18)
+    jipcode (2.0.19)
 
 GEM
   remote: https://rubygems.org/
@@ -38,6 +38,7 @@ GEM
 
 PLATFORMS
   x86_64-darwin-19
+  x86_64-darwin-20
   x86_64-linux
 
 DEPENDENCIES
