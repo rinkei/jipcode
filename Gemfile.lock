@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    jipcode (2.0.20)
+    jipcode (2.0.21)
 
 GEM
   remote: https://rubygems.org/
@@ -52,4 +52,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   2.2.19
+   2.2.22
