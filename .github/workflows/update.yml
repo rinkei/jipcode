@@ -1,0 +1,25 @@
+name: zipcode update
+
+on:
+  schedule:
+    - cron: '20 0 1 * *' # 日本時間の毎月1日9時20分に実行する
+
+jobs:
+  zipcode_update:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby-version: ['3.0']
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@473e4d8fe5dd94ee328fdfca9f8c9c7afc9dae5e
+      with:
+        ruby-version: ${{ matrix.ruby-version }}
+    - name: bundle install
+      run: bundle install
+    - name: Run update
+      run: bin/update
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

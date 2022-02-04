@@ -2,9 +2,13 @@
 
 # 最後のデータ更新月が現在の月ならば実行しない
 if [ `cat zipcode/current_month` = `date "+%Y%m"` ]; then
+  echo The zipcode has already been updated in this month.
   exit 0
 fi
 
+git remote set-url origin https://github-actions:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}
+git config --global user.name "${GITHUB_ACTOR}"
+git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 git checkout master
 
 bundle exec rake update
@@ -19,9 +23,5 @@ if git commit -m `date "+%Y年%m月%d日現在の郵便番号データに更新"
   bundle exec bump patch --no-commit
   git add Gemfile.lock lib/jipcode/version.rb
   git commit -m "バージョンを`bundle exec bump current | sed -e "s/^\(.*: \)//"`に更新"
-
-  openssl aes-256-cbc -K $encrypted_3597653ee3ea_key -iv $encrypted_3597653ee3ea_iv -in .travis_rsa.enc -out ~/.ssh/id_rsa -d
-  chmod 600 ~/.ssh/id_rsa
-  git remote set-url origin git@github.com:rinkei/jipcode.git
   git push origin master
 fi
