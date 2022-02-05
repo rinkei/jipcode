@@ -6,9 +6,8 @@ if [ `cat zipcode/current_month` = `date "+%Y%m"` ]; then
   exit 0
 fi
 
-git remote set-url origin https://github-actions:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}
 git config --global user.name "${GITHUB_ACTOR}"
-git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+git config --global user.email "<>"
 git checkout master
 
 bundle exec rake update
