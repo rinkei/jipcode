@@ -19,6 +19,7 @@ fi
 git add zipcode/latest zipcode/current_month
 
 if git commit -m `date "+%Y年%m月%d日現在の郵便番号データに更新"`; then
+  bundle config unset deployment
   bundle exec bump patch --no-commit
   git add Gemfile.lock lib/jipcode/version.rb
   git commit -m "バージョンを`bundle exec bump current | sed -e "s/^\(.*: \)//"`に更新"
