@@ -1,0 +1,19 @@
+name: zipcode update
+
+on:
+  schedule:
+    - cron: '20 0 1 * *' # 日本時間の毎月1日9時20分に実行する
+
+jobs:
+  zipcode_update:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.0
+        bundler-cache: true
+    - name: Run update
+      run: bin/update
