@@ -67,8 +67,6 @@ module Jipcode
     # Private
 
     def unpack(type)
-      download unless File.exist?("zipcode/#{type}.zip")
-
       content = ::Zip::File.open("zipcode/#{type}.zip") do |zip_file|
                   entry = zip_file.glob(ZIPCODE_FILES[type]).first
                   raise '日本郵便のファイルからデータが見つかりませんでした。' unless entry
