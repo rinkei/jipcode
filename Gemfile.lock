@@ -45,13 +45,13 @@ PLATFORMS
 
 DEPENDENCIES
   bump
-  bundler (~> 2.2)
+  bundler
   jipcode!
-  rake (~> 13.0)
-  rspec (~> 3.0)
+  rake
+  rspec
   rubyzip
   vcr
   webmock
 
 BUNDLED WITH
-   2.2.22
+   2.3.6
