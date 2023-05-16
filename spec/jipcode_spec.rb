@@ -48,6 +48,42 @@ RSpec.describe Jipcode do
           ]
         end
       end
+
+      context 'opt[:kana]' do
+        let(:zipcode) { '1000011' }
+        let (:opt) { { kana: true } }
+
+        it '対応する*_kanaも含む配列を返す' do
+          is_expected.to eq [
+            { zipcode: '1000011',
+              prefecture: '東京都',
+              city: '千代田区',
+              town: '内幸町',
+              prefecture_kana: 'トウキョウト',
+              city_kana: 'チヨダク',
+              town_kana: 'ウチサイワイチョウ' }
+          ]
+        end
+      end
+
+      context 'opt[:kana] and opt[:prefecture_code]' do
+        let(:zipcode) { '1000011' }
+        let (:opt) { { kana: true, prefecture_code: true } }
+
+        it '対応する*_kana,prefecture_codeも含む配列を返す' do
+          is_expected.to eq [
+            { zipcode: '1000011',
+              prefecture: '東京都',
+              city: '千代田区',
+              town: '内幸町',
+              prefecture_kana: 'トウキョウト',
+              city_kana: 'チヨダク',
+              town_kana: 'ウチサイワイチョウ',
+              prefecture_code: 13
+            }
+          ]
+        end
+      end
     end
   end
 end
