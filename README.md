@@ -62,7 +62,7 @@ Jipcode.locate('1510051', prefecture_code: true, kana: true)
 =end
 ```
 
-例外として、大口事業所個別番号は番地のカナが`:town_kana`に含まれず、町域までとなります。
+例外として、大口事業所個別番号の`:town_kana`は空文字列が返却されます。
 
 ```ruby
 Jipcode.locate('0608614', prefecture_code: true, kana: true)
@@ -74,7 +74,7 @@ Jipcode.locate('0608614', prefecture_code: true, kana: true)
   :prefecture_code=>1,
   :prefecture_kana=>"ホッカイドウ",
   :city_kana=>"サッポロシチュウオウク",
-  :town_kana=>"オオドオリニシ"}]
+  :town_kana=>""}]
 =end
 ```
 

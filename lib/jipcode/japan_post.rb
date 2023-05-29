@@ -54,7 +54,6 @@ module Jipcode
 
         kana_dict[prefecture] = prefecture_kana
         kana_dict[city]       = city_kana
-        kana_dict[town]       = town_kana
 
         [zipcode, prefecture, city, town, prefecture_kana, city_kana, town_kana]
       end
@@ -68,7 +67,7 @@ module Jipcode
 
         prefecture_kana = kana_dict[prefecture]
         city_kana       = kana_dict[city]
-        town_kana       = kana_dict[row[5]] # [MEMO] 番地に対してのカナは提供しない
+        town_kana       = "" # [MEMO] 事業所データの町域番地に対してのカナは提供しない
 
         [zipcode, prefecture, city, town, prefecture_kana, city_kana, town_kana]
       end

@@ -39,7 +39,7 @@ module Jipcode
     if opt[:kana] then
       address[:prefecture_kana] = address_param[4]
       address[:city_kana]       = address_param[5]
-      address[:town_kana]       = address_param[6]
+      address[:town_kana]       = address_param[6] || ""
     end
     address
   end
