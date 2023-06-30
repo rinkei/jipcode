@@ -17,3 +17,7 @@ jobs:
         bundler-cache: true
     - name: Run update
       run: bin/update
+    - name: Release
+      run: bundle exec rake release
+      env:
+        GEM_HOST_API_KEY: ${{ secrets.GEM_HOST_API_KEY }}
