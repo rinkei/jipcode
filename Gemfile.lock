@@ -6,52 +6,52 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    addressable (2.8.0)
-      public_suffix (>= 2.0.2, < 5.0)
+    addressable (2.8.4)
+      public_suffix (>= 2.0.2, < 6.0)
     bump (0.10.0)
     crack (0.4.5)
       rexml
-    diff-lcs (1.4.4)
+    diff-lcs (1.5.0)
     hashdiff (1.0.1)
-    public_suffix (4.0.6)
-    rake (13.0.3)
+    public_suffix (5.0.1)
+    rake (13.0.6)
     rexml (3.2.5)
-    rspec (3.10.0)
-      rspec-core (~> 3.10.0)
-      rspec-expectations (~> 3.10.0)
-      rspec-mocks (~> 3.10.0)
-    rspec-core (3.10.1)
-      rspec-support (~> 3.10.0)
-    rspec-expectations (3.10.1)
+    rspec (3.12.0)
+      rspec-core (~> 3.12.0)
+      rspec-expectations (~> 3.12.0)
+      rspec-mocks (~> 3.12.0)
+    rspec-core (3.12.2)
+      rspec-support (~> 3.12.0)
+    rspec-expectations (3.12.3)
       diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.10.0)
-    rspec-mocks (3.10.2)
+      rspec-support (~> 3.12.0)
+    rspec-mocks (3.12.5)
       diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.10.0)
-    rspec-support (3.10.2)
-    rubyzip (2.3.0)
-    vcr (6.0.0)
-    webmock (3.13.0)
-      addressable (>= 2.3.6)
+      rspec-support (~> 3.12.0)
+    rspec-support (3.12.1)
+    rubyzip (2.3.2)
+    vcr (6.2.0)
+    webmock (3.18.1)
+      addressable (>= 2.8.0)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
 
 PLATFORMS
-  arm64-darwin-22
   x86_64-darwin-19
   x86_64-darwin-20
   x86_64-darwin-21
   x86_64-linux
+  arm64-darwin-22
 
 DEPENDENCIES
   bump
-  bundler (~> 2.2)
+  bundler
   jipcode!
-  rake (~> 13.0)
-  rspec (~> 3.0)
+  rake
+  rspec
   rubyzip
   vcr
   webmock
 
 BUNDLED WITH
-   2.2.22
+   2.4.10

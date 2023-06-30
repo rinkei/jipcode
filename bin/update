@@ -6,7 +6,7 @@ if [ `cat zipcode/current_month` = `date "+%Y%m"` ]; then
   exit 0
 fi
 
-git config --global user.name "${GITHUB_ACTOR}"
+git config --global user.name "Github Actions"
 git config --global user.email "<>"
 git checkout master
 

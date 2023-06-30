@@ -21,9 +21,9 @@ Gem::Specification.new do |spec|
   end
   spec.require_paths = ["lib"]
 
-  spec.add_development_dependency "bundler", "~> 2.2"
-  spec.add_development_dependency "rake", "~> 13.0"
-  spec.add_development_dependency "rspec", "~> 3.0"
+  spec.add_development_dependency "bundler"
+  spec.add_development_dependency "rake"
+  spec.add_development_dependency "rspec"
   spec.add_development_dependency 'rubyzip'
   spec.add_development_dependency 'webmock'
   spec.add_development_dependency 'vcr'
