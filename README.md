@@ -43,6 +43,41 @@ Jipcode.locate('1510051', prefecture_code: true)
 # => [{:zipcode=>"1510051", :prefecture=>"東京都", :city=>"渋谷区", :town=>"千駄ヶ谷", :prefecture_code=>13}]
 ```
 
+#### 全角カナ
+
+加えてオプションで、都道府県カナ、市区町村カナ、町域番地カナを検索結果に含めることもできます。
+
+```ruby
+Jipcode.locate('1510051', prefecture_code: true, kana: true)
+=begin
+=>
+[{:zipcode=>"1510051",
+  :prefecture=>"東京都",
+  :city=>"渋谷区",
+  :town=>"千駄ヶ谷",
+  :prefecture_code=>13,
+  :prefecture_kana=>"トウキョウト",
+  :city_kana=>"シブヤク",
+  :town_kana=>"センダガヤ"}]
+=end
+```
+
+例外として、大口事業所個別番号の`:town_kana`は空文字列が返却されます。
+
+```ruby
+Jipcode.locate('0608614', prefecture_code: true, kana: true)
+=begin
+[{:zipcode=>"0608614",
+  :prefecture=>"北海道",
+  :city=>"札幌市中央区",
+  :town=>"大通西５丁目地下鉄大通駅西側コンコース内",
+  :prefecture_code=>1,
+  :prefecture_kana=>"ホッカイドウ",
+  :city_kana=>"サッポロシチュウオウク",
+  :town_kana=>""}]
+=end
+```
+
 ### 更新
 日本郵便の郵便番号データは月末に更新されています。
 jipcodeではこれを毎月取り込んでいます。

@@ -36,6 +36,11 @@ module Jipcode
   def extended_address_from(address_param, opt={})
     address = basic_address_from(address_param)
     address[:prefecture_code] = PREFECTURE_CODE.invert[address_param[1]] if opt[:prefecture_code]
+    if opt[:kana] then
+      address[:prefecture_kana] = address_param[4]
+      address[:city_kana]       = address_param[5]
+      address[:town_kana]       = address_param[6] || ""
+    end
     address
   end
 
