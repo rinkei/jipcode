@@ -1,7 +1,8 @@
 PATH
   remote: .
   specs:
-    jipcode (3.0.12)
+    jipcode (3.1.0)
+      csv
 
 GEM
   remote: https://rubygems.org/
@@ -11,6 +12,7 @@ GEM
     bump (0.10.0)
     crack (0.4.5)
       rexml
+    csv (3.2.8)
     diff-lcs (1.5.0)
     hashdiff (1.0.1)
     public_suffix (5.0.1)
