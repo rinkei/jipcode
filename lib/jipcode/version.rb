@@ -1,3 +1,3 @@
 module Jipcode
-  VERSION = '3.1.13'
+  VERSION = '3.1.14'
 end
