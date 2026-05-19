@@ -2,10 +2,7 @@ PATH
   remote: .
   specs:
     jipcode (3.2.0)
-      base64
-      bigdecimal
       csv
-      nkf
 
 GEM
   remote: https://rubygems.org/
@@ -53,9 +50,12 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  base64
+  bigdecimal
   bump
   bundler
   jipcode!
+  nkf
   rake
   rspec
   rubyzip
