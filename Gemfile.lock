@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    jipcode (3.3.0)
+    jipcode (3.4.0)
       csv
 
 GEM
@@ -44,6 +44,7 @@ GEM
 PLATFORMS
   arm64-darwin-22
   arm64-darwin-23
+  arm64-darwin-25
   x86_64-darwin-19
   x86_64-darwin-20
   x86_64-darwin-21
