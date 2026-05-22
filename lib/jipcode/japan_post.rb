@@ -7,8 +7,8 @@ require 'nkf'
 module Jipcode
   module JapanPost
     ZIPCODE_URLS = {
-      general: 'https://www.post.japanpost.jp/zipcode/dl/kogaki/zip/ken_all.zip'.freeze,
-      company: 'https://www.post.japanpost.jp/zipcode/dl/jigyosyo/zip/jigyosyo.zip'.freeze
+      general: 'https://www.post.japanpost.jp/service/search/zipcode/download/kogaki/zip/ken_all.zip'.freeze,
+      company: 'https://www.post.japanpost.jp/service/search/zipcode/download/office/zip/jigyosyo.zip'.freeze
     }.freeze
     ZIPCODE_FILES = {
       general: 'KEN_ALL.CSV'.freeze,
