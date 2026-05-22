@@ -22,6 +22,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "csv"
+  spec.add_development_dependency "irb"
   spec.add_development_dependency "nkf"
   spec.add_development_dependency "base64"
   spec.add_development_dependency "bigdecimal"
