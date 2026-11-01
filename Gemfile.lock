@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    jipcode (3.4.5)
+    jipcode (3.4.6)
       csv
 
 GEM
